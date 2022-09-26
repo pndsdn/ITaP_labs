@@ -12,4 +12,12 @@ public class Palindrome {
         }
         return res;
     }
+
+    public static boolean isPalindrome(String s) {
+        String reverse = reverseString(s);
+        if (s.equals(reverse)) {
+            return true;
+        }
+        return false;
+    }
 }
