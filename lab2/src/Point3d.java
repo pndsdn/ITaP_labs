@@ -37,4 +37,13 @@ public class Point3d {
     public void setZ(double z) {
         zCoord = z;
     }
+
+    public boolean equal(Point3d AnotherPoint) {
+        if (xCoord == AnotherPoint.xCoord &&
+                yCoord == AnotherPoint.yCoord &&
+                zCoord == AnotherPoint.zCoord) {
+            return true;
+        }
+        return false;
+    }
 }
