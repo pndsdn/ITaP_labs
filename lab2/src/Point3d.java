@@ -39,11 +39,14 @@ public class Point3d {
     }
 
     public boolean equal(Point3d AnotherPoint) {
-        if (xCoord == AnotherPoint.xCoord &&
+        return xCoord == AnotherPoint.xCoord &&
                 yCoord == AnotherPoint.yCoord &&
-                zCoord == AnotherPoint.zCoord) {
-            return true;
-        }
-        return false;
+                zCoord == AnotherPoint.zCoord;
+    }
+
+    public double distanceTo(Point3d AnotherPoint) {
+        return (Math.round(Math.sqrt(Math.pow((AnotherPoint.xCoord - xCoord), 2) +
+                Math.pow((AnotherPoint.yCoord - yCoord), 2) +
+                Math.pow((AnotherPoint.zCoord - zCoord), 2)) * 100) / 100.0);
     }
 }
