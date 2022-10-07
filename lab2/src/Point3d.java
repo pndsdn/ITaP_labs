@@ -1,7 +1,6 @@
 public class Point3d {
     private double xCoord;
     private double yCoord;
-
     private double zCoord;
 
     public Point3d() {
