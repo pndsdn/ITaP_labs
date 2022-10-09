@@ -16,4 +16,15 @@ public class Main {
             return 0;
         }
     }
+
+    // 3_2
+    public static int findZip(String s) {
+        int iZip = s.indexOf("zip");
+        String sc = s.substring(iZip+3);
+        System.out.println(sc);
+        if (!sc.contains("zip")) {
+            return -1;
+        }
+        return sc.indexOf("zip")+iZip+3;
+    }
 }
