@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -26,5 +28,16 @@ public class Main {
             return -1;
         }
         return sc.indexOf("zip")+iZip+3;
+    }
+
+    // 3_3
+    public static boolean checkPerfect(int num) {
+        int res = 1;
+        for (int i = 2; i*i < num; ++i) {
+            if (num % i == 0) {
+                res += i + num/i;
+            }
+        }
+        return num == res;
     }
 }
