@@ -40,4 +40,12 @@ public class Main {
     public static int ctoa(char c) {
         return (int)(c);
     }
+
+    public static int addUpTo(int num) {
+        int res = 0;
+        for (int i = 1; i <= num; ++i) {
+            res += i;
+        }
+        return res;
+    }
 }
