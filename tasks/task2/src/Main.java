@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-
+        
     }
 
     // 2_1
@@ -83,8 +83,8 @@ public class Main {
 
     // 2_8
     public static boolean isStrangePair(String s1, String s2) {
-        if (s1.length() == 0 || s2.length() == 0) {
-            if (s1.length() == 0 && s2.length() == 0) {
+        if (s1.isEmpty() || s2.isEmpty()) {
+            if (s1.isEmpty() && s2.isEmpty()) {
                 return true;
             }
             return false;
@@ -92,5 +92,26 @@ public class Main {
 
         return (s1.charAt(0) == s2.charAt(s2.length()-1) &&
                 s1.charAt(s1.length()-1) == s2.charAt(0));
+    }
+
+    // 2_9
+    public static boolean isPrefix(String word, String prefix) {
+        if (prefix.endsWith("-")) {
+            prefix = prefix.substring(0, prefix.length()-1);
+            if (word.startsWith(prefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSuffix(String word, String suffix) {
+        if (suffix.startsWith("-")) {
+            suffix = suffix.substring(1, suffix.length());
+            if (word.endsWith(suffix)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
