@@ -15,10 +15,10 @@ public class Main {
     }
 
     // 2_2
-    public static double differenceMaxMin(double[] arrOfNums) {
+    public static int differenceMaxMin(int[] arrOfNums) {
         double minNum = Double.POSITIVE_INFINITY;
         double maxNum = Double.NEGATIVE_INFINITY;
-        for (double num : arrOfNums) {
+        for (int num : arrOfNums) {
             if (num < minNum) {
                 minNum = num;
             }
@@ -26,6 +26,15 @@ public class Main {
                 maxNum = num;
             }
         }
-        return (maxNum - minNum);
+        return (int)(maxNum - minNum);
+    }
+
+    // 2_3
+    public static boolean isAvgWhole(int[] arrOfNums) {
+        int res = 0;
+        for (int num : arrOfNums) {
+            res += num;
+        }
+        return (res % arrOfNums.length == 0);
     }
 }
