@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        System.out.println(isKaprekar(297));
     }
 
     // 3_1
@@ -23,7 +23,6 @@ public class Main {
     public static int findZip(String s) {
         int iZip = s.indexOf("zip");
         String sc = s.substring(iZip+3);
-        System.out.println(sc);
         if (!sc.contains("zip")) {
             return -1;
         }
@@ -86,4 +85,21 @@ public class Main {
         }
         return uniqueArr1.size() == uniqueArr2.size();
     }
+
+    // 3_7
+    public static boolean isKaprekar(int num) {
+        String sNum = Integer.toString(num*num);
+        if (sNum.length() < 2) {
+            return num == num*num;
+        }
+        String left = "";
+        String right = "";
+        for (int i = 0; i < sNum.length() / 2; ++i) {
+            left += sNum.charAt(i);
+        }
+        right = sNum.substring(left.length());
+        return Integer.parseInt(left) + Integer.parseInt(right) == num;
+    }
+
+    // 3_8
 }
