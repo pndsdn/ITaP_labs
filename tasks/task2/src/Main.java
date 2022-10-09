@@ -46,4 +46,14 @@ public class Main {
             subtotal = arrOfNums[i];
         }
     }
+
+    // 2_5
+    public static int getDecimalPlaces(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) == '.') {
+                return (s.length() - 1 - i);
+            }
+        }
+        return 0;
+    }
 }
