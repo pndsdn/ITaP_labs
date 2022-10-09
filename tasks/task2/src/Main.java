@@ -13,4 +13,19 @@ public class Main {
         }
         return res;
     }
+
+    // 2_2
+    public static double differenceMaxMin(double[] arrOfNums) {
+        double minNum = Double.POSITIVE_INFINITY;
+        double maxNum = Double.NEGATIVE_INFINITY;
+        for (double num : arrOfNums) {
+            if (num < minNum) {
+                minNum = num;
+            }
+            if (num > maxNum) {
+                maxNum = num;
+            }
+        }
+        return (maxNum - minNum);
+    }
 }
