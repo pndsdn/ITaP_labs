@@ -49,6 +49,10 @@ public class Main {
         return res;
     }
 
+    public static int nextEdge(int a, int b) {
+        return (a+b-1);
+    }
+
     public static int sumOfCubes(int[] arrOfNums) {
         int res = 0;
         for (int num : arrOfNums) {
