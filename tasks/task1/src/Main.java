@@ -18,4 +18,22 @@ public class Main {
     public static boolean profitableGamble(double prob, double prize, double pay) {
         return (prob * prize - pay > 0);
     }
+
+    public static String operator(int N, int a, int b) {
+        if (a+b == N) {
+            return "added";
+        }
+        else if (a-b == N) {
+            return "subtracted";
+        }
+        else if (a*b == N) {
+            return "multiplied";
+        }
+        else if (a/b == N) {
+            return "divided";
+        }
+        else {
+            return "none";
+        }
+    }
 }
