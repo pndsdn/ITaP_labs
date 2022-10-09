@@ -36,4 +36,8 @@ public class Main {
             return "none";
         }
     }
+
+    public static int ctoa(char c) {
+        return (int)(c);
+    }
 }
