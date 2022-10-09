@@ -51,4 +51,22 @@ public class Main {
         }
         return s.charAt(s.length()-1) + s.substring(1, s.length()-1) + s.charAt(0);
     }
+
+    // 3_5
+    public static boolean isValidHexCode(String code) {
+        if (!code.startsWith("#")) {
+            return false;
+        }
+        if (code.length() != 7) {
+            return false;
+        }
+        for (int i = 1; i < code.length(); ++i) {
+            if (!(((int)code.charAt(i) >= 48 && (int)code.charAt(i) <= 57) ||
+                    ((int)code.charAt(i) >= 65 && (int)code.charAt(i) <= 70) ||
+                    ((int)code.charAt(i) >= 97 && (int)code.charAt(i) <= 102))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
