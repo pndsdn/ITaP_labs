@@ -37,4 +37,13 @@ public class Main {
         }
         return (res % arrOfNums.length == 0);
     }
+
+    // 2_4
+    public static void cumulativeSum(int[] arrOfNums) {
+        int subtotal = 0;
+        for(int i = 0; i < arrOfNums.length; ++i) {
+            arrOfNums[i] += subtotal;
+            subtotal = arrOfNums[i];
+        }
+    }
 }
