@@ -137,4 +137,19 @@ public class Main {
         }
         return true;
     }
+
+    // 3_10
+    public static boolean rightTriangle(int x, int y, int z) {
+        if (x < y) {
+            y += x;
+            x = y - x;
+            y -= x;
+        }
+        if (x < z) {
+            z += x;
+            x = z - x;
+            z -= x;
+        }
+        return (x*x - y*y - z*z == 0);
+    }
 }
