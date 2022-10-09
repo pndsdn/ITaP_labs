@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        
+
     }
 
     // 2_1
@@ -113,5 +113,23 @@ public class Main {
             }
         }
         return false;
+    }
+
+    // 2_10
+    public static int boxSeq(int step) {
+        if (step == 0) {
+            return 0;
+        }
+
+        int res = 0;
+        for (int i = 0; i < step; ++i) {
+            if (i % 2 == 0) {
+                res+=3;
+            }
+            else {
+                res-=1;
+            }
+        }
+        return res;
     }
 }
