@@ -51,8 +51,8 @@ public class Main {
 
     public static int sumOfCubes(int[] arrOfNums) {
         int res = 0;
-        for (int i = 0; i < arrOfNums.length; ++i) {
-            res += Math.pow(arrOfNums[i], 3);
+        for (int num : arrOfNums) {
+            res += Math.pow(num, 3);
         }
         return res;
     }
