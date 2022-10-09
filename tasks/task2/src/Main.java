@@ -41,7 +41,7 @@ public class Main {
     // 2_4
     public static void cumulativeSum(int[] arrOfNums) {
         int subtotal = 0;
-        for(int i = 0; i < arrOfNums.length; ++i) {
+        for (int i = 0; i < arrOfNums.length; ++i) {
             arrOfNums[i] += subtotal;
             subtotal = arrOfNums[i];
         }
@@ -66,5 +66,18 @@ public class Main {
             return 2;
         }
         return (Fibonacci(n - 2) + Fibonacci(n - 1));
+    }
+
+    // 2_7
+    public static boolean isValid(String s) {
+        if (s.length() > 5) {
+            return false;
+        }
+        for (int i = 0; i < s.length(); ++i) {
+            if ((int)(s.charAt(i)) < 48 || (int)(s.charAt(i)) > 57) {
+                return false;
+            }
+        }
+        return  true;
     }
 }
