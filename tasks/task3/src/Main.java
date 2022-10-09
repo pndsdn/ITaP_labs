@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(isKaprekar(297));
+
     }
 
     // 3_1
@@ -102,4 +102,20 @@ public class Main {
     }
 
     // 3_8
+    public static String longestZero(String s) {
+        String maxChain = "";
+        int count = 0;
+        for (int i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) == '0') {
+                ++count;
+                if (maxChain.length() < count) {
+                    maxChain += "0";
+                }
+            }
+            else {
+                count = 0;
+            }
+        }
+        return maxChain;
+    }
 }
