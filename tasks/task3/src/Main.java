@@ -1,4 +1,4 @@
-import javax.swing.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -68,5 +68,22 @@ public class Main {
             }
         }
         return true;
+    }
+
+    // 3_6
+    public static boolean same(int[] arr1, int[] arr2) {
+        List<Integer> uniqueArr1 = new ArrayList<Integer>();
+        List<Integer> uniqueArr2 = new ArrayList<Integer>();
+        for (int num : arr1) {
+            if (!(uniqueArr1.contains(num))) {
+                uniqueArr1.add(num);
+            }
+        }
+        for (int num : arr2) {
+            if (!(uniqueArr2.contains(num))) {
+                uniqueArr2.add(num);
+            }
+        }
+        return uniqueArr1.size() == uniqueArr2.size();
     }
 }
