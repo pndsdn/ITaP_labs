@@ -13,16 +13,17 @@ public class Main {
         return ((b * h)/2);
     }
 
+    // 1_3
     public static int animals(int chickens, int cows, int pigs) {
         return (chickens*2 + cows*4 + pigs*4);
     }
 
-    // 1_3
+    // 1_4
     public static boolean profitableGamble(double prob, double prize, double pay) {
         return (prob * prize - pay > 0);
     }
 
-    // 1_4
+    // 1_5
     public static String operator(int N, int a, int b) {
         if (a+b == N) {
             return "added";
