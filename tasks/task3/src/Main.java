@@ -118,4 +118,23 @@ public class Main {
         }
         return maxChain;
     }
+
+    // 3_9
+    public static int nextPrime(int num) {
+        for (int i = num; i < num*num; ++i) {
+            if (isPrime(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean isPrime(int n) {
+        for (int i = 2; i < n; ++i) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
