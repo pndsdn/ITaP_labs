@@ -4,6 +4,7 @@ public class Lab1 {
     public static void main(String[] args) {
         Point3d[] threePoints = new Point3d[3];
         Scanner sc = new Scanner(System.in);
+        // entering coordinates of 3 Point3D objects
         for (int i = 0; i < 3; ++i) {
             double[] point = new double[3];
             for (int j = 0; j < 3; ++j) {
@@ -13,7 +14,10 @@ public class Lab1 {
             System.out.println();
             threePoints[i] = new Point3d(point[0], point[1], point[2]);
         }
-        if (!threePoints[0].equal(threePoints[1]) && !threePoints[1].equal(threePoints[2]) && !threePoints[2].equal(threePoints[0])) {
+        // equal points check
+        if (!(threePoints[0].equal(threePoints[1]) ||
+                threePoints[1].equal(threePoints[2]) ||
+                threePoints[2].equal(threePoints[0]))) {
             double res = computeArea(threePoints[0], threePoints[1], threePoints[2]);
             System.out.println(res);
         }
