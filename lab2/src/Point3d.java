@@ -1,6 +1,4 @@
-public class Point3d {
-    private double xCoord;
-    private double yCoord;
+public class Point3d extends Point2d {
     private double zCoord;
 
     public Point3d() {
@@ -8,44 +6,27 @@ public class Point3d {
     }
 
     public Point3d(double x, double y, double z) {
-        xCoord = x;
-        yCoord = y;
+        super(x,y);
         zCoord = z;
-    }
-
-    public double getX() {
-        return  xCoord;
-    }
-
-    public double getY() {
-        return yCoord;
     }
 
     public double getZ() {
         return zCoord;
     }
 
-    public void setX(double x) {
-        xCoord = x;
-    }
-
-    public void setY(double y) {
-        yCoord = y;
-    }
-
     public void setZ(double z) {
         zCoord = z;
     }
 
-    public boolean equal(Point3d AnotherPoint) {
-        return xCoord == AnotherPoint.xCoord &&
-                yCoord == AnotherPoint.yCoord &&
-                zCoord == AnotherPoint.zCoord;
+    public boolean equal(Point3d anotherPoint) {
+        return super.equal(anotherPoint) &&
+                zCoord == anotherPoint.zCoord;
     }
 
-    public double distanceTo(Point3d AnotherPoint) {
-        return (Math.round(Math.sqrt(Math.pow((AnotherPoint.xCoord - xCoord), 2) +
-                Math.pow((AnotherPoint.yCoord - yCoord), 2) +
-                Math.pow((AnotherPoint.zCoord - zCoord), 2)) * 100) / 100.0);
+    @Override
+    public double distanceTo(Point3d anotherPoint) {
+        return (Math.round(Math.sqrt(Math.pow((anotherPoint.getX() - this.getX()), 2) +
+                Math.pow((anotherPoint.getY() - this.getY()), 2) +
+                Math.pow((anotherPoint.getZ() - this.getZ()), 2)) * 100) / 100.0);
     }
 }
