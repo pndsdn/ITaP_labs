@@ -82,7 +82,10 @@ public class AStarState
      * open list to the closed list.
      **/
     public void closeWaypoint(Location loc) {
-        // TODO:  Implement.
+        Waypoint wp = openedWP.remove(loc);
+        if (wp != null) {
+            closedWP.put(loc, wp);
+        }
     }
 
     /**
