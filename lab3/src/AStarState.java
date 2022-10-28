@@ -14,8 +14,8 @@ public class AStarState
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
-    private HashMap<Location, Waypoint> openedWaypoints = new HashMap<>();
-    private HashMap<Location, Waypoint> closedWaypoints = new HashMap<>();
+    private HashMap<Location, Waypoint> openedWP = new HashMap<>();
+    private HashMap<Location, Waypoint> closedWP = new HashMap<>();
 
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
@@ -42,14 +42,14 @@ public class AStarState
     public Waypoint getMinOpenWaypoint() {
         Location minLoc = null;
         float minTotalCost = Float.POSITIVE_INFINITY;
-        for (Location loc : openedWaypoints.keySet()) {
-            float totalCost = openedWaypoints.get(loc).getTotalCost();
+        for (Location loc : openedWP.keySet()) {
+            float totalCost = openedWP.get(loc).getTotalCost();
             if (minTotalCost > totalCost) {
                 minTotalCost = totalCost;
                 minLoc = loc;
             }
         }
-        return openedWaypoints.get(minLoc);
+        return openedWP.get(minLoc);
     }
 
     /**
@@ -62,14 +62,18 @@ public class AStarState
      * waypoint's "previous cost" value.
      **/
     public boolean addOpenWaypoint(Waypoint newWP) {
-        // TODO:  Implement.
+        Location loc = newWP.getLocation();
+        if (!openedWP.containsKey(loc) || newWP.getPreviousCost() < openedWP.get(loc).getPreviousCost()) {
+            openedWP.put(loc, newWP);
+            return true;
+        }
         return false;
     }
 
 
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints() {
-        return openedWaypoints.size();
+        return openedWP.size();
     }
 
 
