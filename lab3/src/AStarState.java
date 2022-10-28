@@ -40,8 +40,16 @@ public class AStarState
      * returns <code>null</code>.
      **/
     public Waypoint getMinOpenWaypoint() {
-        // TODO:  Implement.
-        return null;
+        Location minLoc = null;
+        float minTotalCost = Float.POSITIVE_INFINITY;
+        for (Location loc : openedWaypoints.keySet()) {
+            float totalCost = openedWaypoints.get(loc).getTotalCost();
+            if (minTotalCost > totalCost) {
+                minTotalCost = totalCost;
+                minLoc = loc;
+            }
+        }
+        return openedWaypoints.get(minLoc);
     }
 
     /**
