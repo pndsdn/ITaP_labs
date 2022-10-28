@@ -1,3 +1,7 @@
+import com.sun.jdi.event.MonitorWaitedEvent;
+
+import java.util.HashMap;
+
 /**
  * This class stores the basic state necessary for the A* algorithm to compute a
  * path across a map.  This state includes a collection of "open waypoints" and
@@ -10,6 +14,8 @@ public class AStarState
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
+    private HashMap<Location, Waypoint> openedWaypoints = new HashMap<>();
+    private HashMap<Location, Waypoint> closedWaypoints = new HashMap<>();
 
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
@@ -33,8 +39,7 @@ public class AStarState
      * with the minimum total cost.  If there are no open waypoints, this method
      * returns <code>null</code>.
      **/
-    public Waypoint getMinOpenWaypoint()
-    {
+    public Waypoint getMinOpenWaypoint() {
         // TODO:  Implement.
         return null;
     }
@@ -48,18 +53,15 @@ public class AStarState
      * if</em> the new waypoint's "previous cost" value is less than the current
      * waypoint's "previous cost" value.
      **/
-    public boolean addOpenWaypoint(Waypoint newWP)
-    {
+    public boolean addOpenWaypoint(Waypoint newWP) {
         // TODO:  Implement.
         return false;
     }
 
 
     /** Returns the current number of open waypoints. **/
-    public int numOpenWaypoints()
-    {
-        // TODO:  Implement.
-        return 0;
+    public int numOpenWaypoints() {
+        return openedWaypoints.size();
     }
 
 
@@ -67,8 +69,7 @@ public class AStarState
      * This method moves the waypoint at the specified location from the
      * open list to the closed list.
      **/
-    public void closeWaypoint(Location loc)
-    {
+    public void closeWaypoint(Location loc) {
         // TODO:  Implement.
     }
 
@@ -76,8 +77,7 @@ public class AStarState
      * Returns true if the collection of closed waypoints contains a waypoint
      * for the specified location.
      **/
-    public boolean isLocationClosed(Location loc)
-    {
+    public boolean isLocationClosed(Location loc) {
         // TODO:  Implement.
         return false;
     }
