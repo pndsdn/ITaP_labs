@@ -90,7 +90,6 @@ public class AStarState
      * for the specified location.
      **/
     public boolean isLocationClosed(Location loc) {
-        // TODO:  Implement.
-        return false;
+        return closedWP.containsKey(loc);
     }
 }
