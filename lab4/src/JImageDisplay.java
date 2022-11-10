@@ -17,12 +17,17 @@ public class JImageDisplay extends JComponent{
         g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
     }
 
-    // set the color of all points in the image to 0
+    // set the color of all points in the image to black (0)
     public void clearImage() {
         for (int w = 0; w < image.getWidth(); ++w) {
             for (int h = 0; h < image.getHeight(); ++h) {
                 image.setRGB(w, h, 0);
             }
         }
+    }
+
+    // set the color of the selected point
+    public void drawPixel(int x, int y, int rgbColor) {
+        image.setRGB(x, y, rgbColor);
     }
 }
