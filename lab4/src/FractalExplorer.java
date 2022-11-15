@@ -15,7 +15,7 @@ public class FractalExplorer {
         fractalGenerator.getInitialRange(complexAreaRange);
     }
 
-    public void creatAndShowGUI() {
+    public void createAndShowGUI() {
         displayImage = new JImageDisplay(displaySize, displaySize);
 //        displayImage.addMouseListener(new );
 
@@ -32,5 +32,29 @@ public class FractalExplorer {
         frame.setResizable(false);
     }
 
-    
+    private void drawFractal() {
+        for (int x = 0; x < displaySize; ++x) {
+            for (int y = 0; y < displaySize; ++y) {
+                double xCoord = FractalGenerator.getCoord(complexAreaRange.x,
+                        complexAreaRange.x + complexAreaRange.width,
+                        displaySize,
+                        x);
+                double yCoord = FractalGenerator.getCoord(complexAreaRange.y,
+                        complexAreaRange.y + complexAreaRange.height,
+                        displaySize,
+                        y);
+
+                int numOfIters = fractalGenerator.numIterations(xCoord, yCoord);
+
+                if (numOfIters == -1) {
+                    displayImage.drawPixel(x, y, 0);
+                }
+                else {
+                    float hue = 0.7f + (float)numOfIters / 200f;
+                    displayImage.drawPixel(x, y, Color.HSBtoRGB(hue, 1f, 1f));
+                }
+            }
+        }
+        displayImage.repaint();
+    }
 }
