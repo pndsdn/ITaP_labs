@@ -1,8 +1,7 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 public class FractalExplorer {
     private int displaySize;
@@ -65,6 +64,24 @@ public class FractalExplorer {
         public void actionPerformed(ActionEvent e) {
             displayImage.clearImage();
             fractalGenerator.getInitialRange(complexAreaRange);
+            drawFractal();
+        }
+    }
+
+    private class ZoomMouseListener extends MouseAdapter implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            double xCoord = FractalGenerator.getCoord(complexAreaRange.x,
+                    complexAreaRange.x + complexAreaRange.width,
+                    displaySize,
+                    e.getX());
+
+            double yCoord = FractalGenerator.getCoord(complexAreaRange.y,
+                    complexAreaRange.y + complexAreaRange.height,
+                    displaySize,
+                    e.getY());
+
+            fractalGenerator.recenterAndZoomRange(complexAreaRange, xCoord, yCoord, 0.5);
             drawFractal();
         }
     }
