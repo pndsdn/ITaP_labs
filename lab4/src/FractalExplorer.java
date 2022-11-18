@@ -1,6 +1,8 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 public class FractalExplorer {
     private int displaySize;
@@ -56,5 +58,14 @@ public class FractalExplorer {
             }
         }
         displayImage.repaint();
+    }
+
+    private class ResetActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            displayImage.clearImage();
+            fractalGenerator.getInitialRange(complexAreaRange);
+            drawFractal();
+        }
     }
 }
