@@ -3,7 +3,9 @@ import java.awt.geom.Rectangle2D;
 public class Mandelbrot extends FractalGenerator {
     public static final int MAX_ITERATIONS = 2000;
 
-    //set initial range (-2 - 1.5i) - (1 + 1.5i)
+    /*
+        Set initial range (-2 - 1.5i) - (1 + 1.5i)
+     */
     @Override
     public void getInitialRange(Rectangle2D.Double range) {
         range.x = -2;
@@ -12,6 +14,12 @@ public class Mandelbrot extends FractalGenerator {
         range.width = 3;
     }
 
+    /*
+        mandelbrot function : z_n = z_{n-1}^2 + C
+        z_0 = 0
+        |z| < 2^2
+        z^2 = x^2 + 2xiy - y^2
+     */
     @Override
     public int numIterations(double x, double y) {
         double currentX = 0;

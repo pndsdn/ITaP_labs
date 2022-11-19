@@ -23,6 +23,9 @@ public class FractalExplorer {
         fractalGenerator.getInitialRange(this.complexAreaRange);
     }
 
+    /*
+        Setup GUI
+     */
     public void createAndShowGUI() {
         displayImage = new JImageDisplay(displaySize, displaySize);
         displayImage.addMouseListener(new ZoomMouseListener());
@@ -40,6 +43,9 @@ public class FractalExplorer {
         frame.setResizable(false);
     }
 
+    /*
+        Count num of iterations and set the color for each pixel
+    */
     private void drawFractal() {
         for (int x = 0; x < displaySize; ++x) {
             for (int y = 0; y < displaySize; ++y) {
@@ -71,6 +77,9 @@ public class FractalExplorer {
         displayImage.repaint();
     }
 
+    /*
+        Listener on Reset button. Reset zoom and redraw the fractal
+     */
     private class ResetActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -80,6 +89,9 @@ public class FractalExplorer {
         }
     }
 
+    /*
+        Listener on mouse click. Zoom the fractal
+     */
     private class ZoomMouseListener extends MouseAdapter implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {

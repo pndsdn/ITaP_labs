@@ -12,12 +12,14 @@ public class JImageDisplay extends JComponent{
     }
 
     @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
     }
 
-    // set the color of all points in the image to black (0)
+    /*
+        Set the color of all points in the image to black (0)
+     */
     public void clearImage() {
         for (int w = 0; w < image.getWidth(); ++w) {
             for (int h = 0; h < image.getHeight(); ++h) {
@@ -26,7 +28,9 @@ public class JImageDisplay extends JComponent{
         }
     }
 
-    // set the color of the selected point
+    /*
+        Set the color of the selected point
+     */
     public void drawPixel(int x, int y, int rgbColor) {
         image.setRGB(x, y, rgbColor);
     }
