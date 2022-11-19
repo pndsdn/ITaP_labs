@@ -1,9 +1,9 @@
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class JImageDisplay extends JComponent{
-    private BufferedImage image;
+    public final BufferedImage image;
 
     public JImageDisplay(int width, int height) {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

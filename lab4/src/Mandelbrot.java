@@ -19,12 +19,12 @@ public class Mandelbrot extends FractalGenerator {
         int iCount = 0;
         while (iCount < MAX_ITERATIONS) {
             ++iCount;
-            double realPart = currentX * currentX - currentIY * currentIY;
-            double imaginaryPart = 2 * currentX * currentIY;
-            currentX = realPart + x;
-            currentIY = imaginaryPart + y;
+            double realPart = currentX * currentX - currentIY * currentIY + x;
+            double imaginaryPart = 2 * currentX * currentIY + y;
+            currentX = realPart;
+            currentIY = imaginaryPart;
 
-            if (currentX * currentX + currentIY * currentIY <= 4) {
+            if (currentX * currentX + currentIY * currentIY > 4) {
                 break;
             }
         }
