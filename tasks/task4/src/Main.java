@@ -4,6 +4,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 //        Bessie(10, 7, "hello my name is Bessie and this is my essay");
+        System.out.println(split("((())())(()(()()))"));
 //        System.out.println(toCamelCase("is_modal_open"));
 //        System.out.println(toSnakeCase("isModalOpen"));
 //        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
@@ -12,9 +13,7 @@ public class Main {
 //        System.out.println(toStarShorthand("77777geff"));
 //        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM."));
 //        System.out.println(trouble(9996533, 112299433));
-        System.out.println(countUniqueBooks("$AA$BBCATT$C$$B$", '$'));
-
-
+//        System.out.println(countUniqueBooks("$AA$BBCATT$C$$B$", '$'));
     }
 
     // 4_1
@@ -40,9 +39,26 @@ public class Main {
     }
 
     // 4_2
-    public static String[] split(String str) {
+    public static List<String> split(String str) {
+        List<String> res = new ArrayList<>();
+        String currStr = "";
+        int depth = 0;
 
-        return null;
+        for (int i = 0; i < str.length(); ++i) {
+            if (str.charAt(i) == '(') {
+                ++depth;
+                currStr += "(";
+            }
+            else {
+                --depth;
+                currStr += ")";
+            }
+            if (depth == 0) {
+                res.add(currStr);
+                currStr = "";
+            }
+        }
+        return res;
     }
 
     // 4_3
@@ -137,7 +153,7 @@ public class Main {
             else {
                 res += str.charAt(i);
                 if (count != 1) {
-                    res += "*" + Integer.toString(count);
+                    res += "*" + count;
                     count = 1;
                 }
             }
@@ -145,10 +161,8 @@ public class Main {
 
         res += str.charAt(i);
         if (count != 1) {
-            res += "*" + Integer.toString(count);
-            count = 1;
+            res += "*" + count;
         }
-
         return res;
     }
 
@@ -268,7 +282,6 @@ public class Main {
                 set.add(stringSequence.charAt(k));
             }
         }
-
         return set.size();
     }
 }
