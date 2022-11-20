@@ -4,7 +4,8 @@ public class Main {
 //        System.out.println(toCamelCase("is_modal_open"));
 //        System.out.println(toSnakeCase("isModalOpen"));
 //        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
-        System.out.println(BMI("154 pounds", "2 meters"));
+//        System.out.println(BMI("154 pounds", "2 meters"));
+        System.out.println(bugger(39));
     }
 
     // 4_1
@@ -95,5 +96,20 @@ public class Main {
             return String.format("%.1f", bmi) + " Overweight";
         }
         return String.format("%.1f", bmi) + " Normal weight";
+    }
+
+    // 4_6
+    public static int bugger (int num) {
+        String numStr = String.valueOf(num);
+        int count = 0;
+        while (num / 10 != 0) {
+            num = 1;
+            for (int i = 0; i < numStr.length(); ++i) {
+                num *= Integer.parseInt(String.valueOf(numStr.charAt(i)));
+            }
+            numStr = String.valueOf(num);
+            ++count;
+        }
+        return count;
     }
 }
