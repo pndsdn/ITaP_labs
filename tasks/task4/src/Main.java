@@ -1,8 +1,9 @@
 public class Main {
     public static void main(String[] args) {
         //Bessie(10, 7, "hello my name is Bessie and this is my essay");
-        System.out.println(toCamelCase("is_modal_open"));
-        System.out.println(toSnakeCase("isModalOpen"));
+        //System.out.println(toCamelCase("is_modal_open"));
+        //System.out.println(toSnakeCase("isModalOpen"));
+        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
     }
 
     // 4_1
@@ -59,5 +60,17 @@ public class Main {
             }
         }
         return res;
+    }
+
+    // 4_4
+    public static String overTime(double[] arr) {
+        double res;
+        if (arr[1] < 17) {
+            res = (arr[1]-arr[0])*arr[2];
+        }
+        else {
+            res = (17-arr[0])*arr[2] + (arr[1]-17)*arr[2]*arr[3];
+        }
+        return "$" + String.valueOf(res) + "0";
     }
 }
