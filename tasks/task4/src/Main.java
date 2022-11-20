@@ -1,9 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        //Bessie(10, 7, "hello my name is Bessie and this is my essay");
-        //System.out.println(toCamelCase("is_modal_open"));
-        //System.out.println(toSnakeCase("isModalOpen"));
-        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
+//        Bessie(10, 7, "hello my name is Bessie and this is my essay");
+//        System.out.println(toCamelCase("is_modal_open"));
+//        System.out.println(toSnakeCase("isModalOpen"));
+//        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
+        System.out.println(BMI("154 pounds", "2 meters"));
     }
 
     // 4_1
@@ -72,5 +73,27 @@ public class Main {
             res = (17-arr[0])*arr[2] + (arr[1]-17)*arr[2]*arr[3];
         }
         return "$" + String.valueOf(res) + "0";
+    }
+
+    // 4_5
+    public static String BMI(String w, String h) {
+        double weight = Double.parseDouble(w.substring(0, w.lastIndexOf(" ")));
+        if(w.endsWith("pounds")){
+            weight = weight * 0.453592;
+        }
+
+        double height = Double.parseDouble(h.substring(0, h.lastIndexOf(" ")));
+        if(h.endsWith("inches")){
+            height = height * 0.0254;
+        }
+
+        double bmi = weight/(height*height);
+        if (bmi < 18.5) {
+            return String.format("%.1f", bmi) + " Underweight";
+        }
+        else if (bmi >= 25) {
+            return String.format("%.1f", bmi) + " Overweight";
+        }
+        return String.format("%.1f", bmi) + " Normal weight";
     }
 }
