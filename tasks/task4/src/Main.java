@@ -5,7 +5,9 @@ public class Main {
 //        System.out.println(toSnakeCase("isModalOpen"));
 //        System.out.println(overTime(new double[] {13.25, 15, 30, 1.5}));
 //        System.out.println(BMI("154 pounds", "2 meters"));
-        System.out.println(bugger(39));
+//        System.out.println(bugger(39));
+//        System.out.println(toStarShorthand("77777geff"));
+        
     }
 
     // 4_1
@@ -111,5 +113,35 @@ public class Main {
             ++count;
         }
         return count;
+    }
+
+    // 4_7
+    public static String toStarShorthand(String str) {
+        String res = "";
+        int count = 1;
+        int i;
+        if (str.length() == 0) {
+            return "";
+        }
+        for (i = 0; i < str.length()-1; ++i) {
+            if (str.charAt(i) == str.charAt(i+1)) {
+                ++count;
+            }
+            else {
+                res += str.charAt(i);
+                if (count != 1) {
+                    res += "*" + Integer.toString(count);
+                    count = 1;
+                }
+            }
+        }
+
+        res += str.charAt(i);
+        if (count != 1) {
+            res += "*" + Integer.toString(count);
+            count = 1;
+        }
+
+        return res;
     }
 }
