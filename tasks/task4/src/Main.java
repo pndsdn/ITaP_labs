@@ -1,6 +1,5 @@
 import javax.swing.plaf.metal.MetalBorders;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +12,7 @@ public class Main {
 //        System.out.println(toStarShorthand("77777geff"));
 //        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM."));
 //        System.out.println(trouble(9996533, 112299433));
+        System.out.println(countUniqueBooks("$AA$BBCATT$C$$B$", '$'));
 
 
     }
@@ -243,5 +243,32 @@ public class Main {
             }
         }
         return false;
+    }
+
+    // 4_10
+    public static int countUniqueBooks(String stringSequence, char bookEnd) {
+        List<Integer> setOfEnds = new ArrayList<>();
+        Set<Character> set = new HashSet<Character>();
+        int count = 0;
+
+        int i = 0;
+        while (true) {
+            if (!(setOfEnds.contains(stringSequence.indexOf(bookEnd, i)))) {
+                setOfEnds.add(i = stringSequence.indexOf(bookEnd, i));
+                if (i == -1) {
+                    break;
+                }
+                ++i;
+            }
+        }
+        setOfEnds.remove(setOfEnds.size()-1);
+
+        for (int j = 0; j < setOfEnds.size()-1; j+=2) {
+            for (int k = setOfEnds.get(j)+1; k < setOfEnds.get(j+1); ++k) {
+                set.add(stringSequence.charAt(k));
+            }
+        }
+
+        return set.size();
     }
 }
