@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
 //        Bessie(10, 7, "hello my name is Bessie and this is my essay");
@@ -7,7 +9,9 @@ public class Main {
 //        System.out.println(BMI("154 pounds", "2 meters"));
 //        System.out.println(bugger(39));
 //        System.out.println(toStarShorthand("77777geff"));
-        
+//        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM."));
+
+
     }
 
     // 4_1
@@ -143,5 +147,33 @@ public class Main {
         }
 
         return res;
+    }
+
+    // 4_8
+    public static boolean doesRhyme (String str1, String str2) {
+        String word1 = str1.split(" ")[str1.split(" ").length-1].toLowerCase();
+        String word2 = str2.split(" ")[str2.split(" ").length-1].toLowerCase();
+
+        char[] vowels = {'a', 'e', 'i', 'o', 'u', 'y'};
+
+        ArrayList<Integer> list1 = new ArrayList<>();
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        for (int i = 0; i < word1.length(); ++i) {
+            for (int j = 0; j < vowels.length; ++j) {
+                if (word1.charAt(i) == vowels[j]) {
+                    list1.add((int)vowels[j]);
+                }
+            }
+        }
+
+        for (int i = 0; i < word2.length(); ++i) {
+            for (int j = 0; j < vowels.length; ++j) {
+                if (word2.charAt(i) == vowels[j]) {
+                    list2.add((int)vowels[j]);
+                }
+            }
+        }
+        return list1.equals(list2);
     }
 }
