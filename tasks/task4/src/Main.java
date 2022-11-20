@@ -1,4 +1,6 @@
+import javax.swing.plaf.metal.MetalBorders;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +12,7 @@ public class Main {
 //        System.out.println(bugger(39));
 //        System.out.println(toStarShorthand("77777geff"));
 //        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM."));
+//        System.out.println(trouble(9996533, 112299433));
 
 
     }
@@ -175,5 +178,70 @@ public class Main {
             }
         }
         return list1.equals(list2);
+    }
+
+    // 4_9
+    public static boolean trouble(long n1, long n2) {
+        String num1 = String.valueOf(n1);
+        String num2 = String.valueOf(n2);
+
+
+        int count = 1;
+        int i;
+        int j;
+        for (i = 0; i < num1.length()-1; ++i) {
+            if (num1.charAt(i) == num1.charAt(i+1)) {
+                ++count;
+            }
+            else {
+                if (count == 3) {
+                    count = 1;
+                    for (j = 0; j < num2.length()-1; ++j) {
+                        if (num2.charAt(j) == num1.charAt(i)) {
+                            if (num2.charAt(j) == num2.charAt(j+1)) {
+                                ++count;
+                            }
+                            else {
+                                if (count == 2) {
+                                    return true;
+                                }
+                            }
+                        }
+                        else {
+                            count = 1;
+                        }
+                    }
+                    if (count == 2) {
+                        return true;
+                    }
+                }
+                else {
+                    count = 1;
+                }
+            }
+        }
+
+        if (count == 3) {
+            count = 1;
+            for (j = 0; j < num2.length()-1; ++j) {
+                if (num2.charAt(j) == num1.charAt(i)) {
+                    if (num2.charAt(j) == num2.charAt(j+1)) {
+                        ++count;
+                    }
+                    else {
+                        if (count == 2) {
+                            return true;
+                        }
+                    }
+                }
+                else {
+                    count = 1;
+                }
+            }
+            if (count == 2) {
+                return true;
+            }
+        }
+        return false;
     }
 }
