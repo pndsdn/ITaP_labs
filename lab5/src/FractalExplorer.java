@@ -42,7 +42,7 @@ public class FractalExplorer {
 
         // save button
         JButton saveButton = new JButton("Save image");
-//        saveButton.addActionListener(new SaveActionListener);
+        saveButton.addActionListener(new SaveActionListener());
 
         // comboBox
         JLabel label = new JLabel("Fractal");
@@ -50,6 +50,7 @@ public class FractalExplorer {
         fractalSelector.addItem(new Mandelbrot());
         fractalSelector.addItem(new Tricorn());
         fractalSelector.addItem(new BurningShip());
+        fractalSelector.addActionListener(new SelectFractalActionListener());
 
         // panels
         JPanel selectPanel = new JPanel();
@@ -61,8 +62,9 @@ public class FractalExplorer {
 
         JFrame frame = new JFrame("Fractal explorer");
         frame.setLayout(new BorderLayout());
+        frame.add(selectPanel, BorderLayout.NORTH);
         frame.add(displayImage, BorderLayout.CENTER);
-        frame.add(resetButton, BorderLayout.SOUTH);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
