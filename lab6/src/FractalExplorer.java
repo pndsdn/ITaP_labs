@@ -1,10 +1,13 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.SwingWorker;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FractalExplorer {
     // display size in pixels
@@ -163,5 +166,17 @@ public class FractalExplorer {
             fractalGenerator.recenterAndZoomRange(complexAreaRange, xCoord, yCoord, 0.5);
             drawFractal();
         }
+    }
+
+
+    private class FractalWorker extends SwingWorker<Object, Object> {
+        private int yCoordRow;
+        private ArrayList<Integer> rowColors;
+
+        FractalWorker(int y) {
+            this.yCoordRow = y;
+        }
+
+        
     }
 }
