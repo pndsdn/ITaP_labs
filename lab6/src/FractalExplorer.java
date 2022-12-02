@@ -77,32 +77,9 @@ public class FractalExplorer {
         Count num of iterations and set the color for each pixel
     */
     private void drawFractal() {
-        for (int x = 0; x < displaySize; ++x) {
-            for (int y = 0; y < displaySize; ++y) {
-                int numOfIters = fractalGenerator.numIterations(
-                        FractalGenerator.getCoord(
-                                complexAreaRange.x,
-                                complexAreaRange.x + complexAreaRange.width,
-                                displaySize,
-                                x
-                        ),
-                        FractalGenerator.getCoord(
-                                complexAreaRange.y,
-                                complexAreaRange.y + complexAreaRange.height,
-                                displaySize,
-                                y
-                        )
-                );
-                int rgbColor;
-                if (numOfIters == -1) {
-                    rgbColor = 0;
-                }
-                else {
-                    float hue = 0.7f + (float) numOfIters / 200f;
-                    rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
-                }
-                displayImage.drawPixel(x, y, rgbColor);
-            }
+        for (int i = 0; i < displaySize; ++i) {
+            FractalWorker drawRow = new FractalWorker(i);
+            drawRow.execute();
         }
         displayImage.repaint();
     }
@@ -207,6 +184,15 @@ public class FractalExplorer {
                 rowColors.add(rgbColor);
             }
             return null;
+        }
+
+        @Override
+        protected void done() {
+            for (int x = 0; x < displaySize; ++x) {
+                displayImage.drawPixel(x, yCoordRow, rowColors.get(x));
+            }
+            displayImage.repaint(0, 0, yCoordRow, displaySize, 1);
+
         }
     }
 }
