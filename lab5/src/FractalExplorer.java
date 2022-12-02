@@ -1,13 +1,17 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+
+import javax.swing.*;
+
 public class FractalExplorer {
     // display size in pixels
     private final int displaySize;
     private JImageDisplay displayImage;
     private FractalGenerator fractalGenerator;
     private Rectangle2D.Double complexAreaRange;
+
+    private JComboBox<FractalGenerator> fractalSelector;
 
     public static void main (String[] args) {
         FractalExplorer fractalExplorer = new FractalExplorer(800);
@@ -83,6 +87,15 @@ public class FractalExplorer {
         @Override
         public void actionPerformed(ActionEvent e) {
             displayImage.clearImage();
+            fractalGenerator.getInitialRange(complexAreaRange);
+            drawFractal();
+        }
+    }
+
+    private class SelectFractalActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fractalGenerator = (FractalGenerator) fractalSelector.getSelectedItem();
             fractalGenerator.getInitialRange(complexAreaRange);
             drawFractal();
         }
