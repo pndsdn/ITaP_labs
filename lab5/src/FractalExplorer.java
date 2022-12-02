@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.imageio.ImageIO;
 
 public class FractalExplorer {
     // display size in pixels
@@ -124,6 +127,17 @@ public class FractalExplorer {
     private class SaveActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("PNG Images", "png");
+            fileChooser.setFileFilter(fileFilter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            if (fileChooser.showSaveDialog(displayImage) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    ImageIO.write(displayImage.image, "png", fileChooser.getSelectedFile());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
 
         }
     }
