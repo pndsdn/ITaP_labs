@@ -177,6 +177,36 @@ public class FractalExplorer {
             this.yCoordRow = y;
         }
 
-        
+        @Override
+        protected Object doInBackground() {
+            rowColors = new ArrayList<>(displaySize);
+
+            for (int x = 0; x < displaySize; ++x) {
+                int numOfIters = fractalGenerator.numIterations(
+                        FractalGenerator.getCoord(
+                                complexAreaRange.x,
+                                complexAreaRange.x + complexAreaRange.width,
+                                displaySize,
+                                x
+                        ),
+                        FractalGenerator.getCoord(
+                                complexAreaRange.y,
+                                complexAreaRange.y + complexAreaRange.height,
+                                displaySize,
+                                yCoordRow
+                        )
+                );
+                int rgbColor;
+                if (numOfIters == -1) {
+                    rgbColor = 0;
+                }
+                else {
+                    float hue = 0.7f + (float) numOfIters / 200f;
+                    rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
+                }
+                rowColors.add(rgbColor);
+            }
+            return null;
+        }
     }
 }
