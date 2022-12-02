@@ -138,18 +138,20 @@ public class FractalExplorer {
     private class ZoomMouseListener extends MouseAdapter implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
-            double xCoord = FractalGenerator.getCoord(complexAreaRange.x,
-                    complexAreaRange.x + complexAreaRange.width,
-                    displaySize,
-                    e.getX());
+            if (rowsRemaining == 0) {
+                double xCoord = FractalGenerator.getCoord(complexAreaRange.x,
+                        complexAreaRange.x + complexAreaRange.width,
+                        displaySize,
+                        e.getX());
 
-            double yCoord = FractalGenerator.getCoord(complexAreaRange.y,
-                    complexAreaRange.y + complexAreaRange.height,
-                    displaySize,
-                    e.getY());
+                double yCoord = FractalGenerator.getCoord(complexAreaRange.y,
+                        complexAreaRange.y + complexAreaRange.height,
+                        displaySize,
+                        e.getY());
 
-            fractalGenerator.recenterAndZoomRange(complexAreaRange, xCoord, yCoord, 0.5);
-            drawFractal();
+                fractalGenerator.recenterAndZoomRange(complexAreaRange, xCoord, yCoord, 0.5);
+                drawFractal();
+            }
         }
     }
 
