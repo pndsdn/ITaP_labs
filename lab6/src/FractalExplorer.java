@@ -18,6 +18,12 @@ public class FractalExplorer {
 
     private JComboBox<FractalGenerator> fractalSelector;
 
+    private JButton saveButton;
+    private JButton resetButton;
+
+
+    private int rowsRemaining = 0;
+
     public static void main (String[] args) {
         FractalExplorer fractalExplorer = new FractalExplorer(800);
         fractalExplorer.createAndShowGUI();
@@ -39,11 +45,11 @@ public class FractalExplorer {
         displayImage.addMouseListener(new ZoomMouseListener());
 
         // reset button
-        JButton resetButton = new JButton("Reset display");
+        resetButton = new JButton("Reset display");
         resetButton.addActionListener(new ResetActionListener());
 
         // save button
-        JButton saveButton = new JButton("Save image");
+        saveButton = new JButton("Save image");
         saveButton.addActionListener(new SaveActionListener());
 
         // comboBox
@@ -77,6 +83,8 @@ public class FractalExplorer {
         Count num of iterations and set the color for each pixel
     */
     private void drawFractal() {
+        enableUI(false);
+        rowsRemaining = displaySize;
         for (int i = 0; i < displaySize; ++i) {
             FractalWorker drawRow = new FractalWorker(i);
             drawRow.execute();
@@ -145,6 +153,12 @@ public class FractalExplorer {
         }
     }
 
+    private void enableUI(boolean val) {
+        fractalSelector.setEnabled(val);
+        saveButton.setEnabled(val);
+        resetButton.setEnabled(val);
+    }
+
 
     private class FractalWorker extends SwingWorker<Object, Object> {
         private int yCoordRow;
@@ -192,7 +206,10 @@ public class FractalExplorer {
                 displayImage.drawPixel(x, yCoordRow, rowColors.get(x));
             }
             displayImage.repaint(0, 0, yCoordRow, displaySize, 1);
-
+            --rowsRemaining;
+            if (rowsRemaining == 0) {
+                enableUI(true);
+            }
         }
     }
 }
