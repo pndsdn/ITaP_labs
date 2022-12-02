@@ -33,13 +33,33 @@ public class FractalExplorer {
         displayImage = new JImageDisplay(displaySize, displaySize);
         displayImage.addMouseListener(new ZoomMouseListener());
 
-        JButton button = new JButton("Reset display");
-        button.addActionListener(new ResetActionListener());
+        // reset button
+        JButton resetButton = new JButton("Reset display");
+        resetButton.addActionListener(new ResetActionListener());
+
+        // save button
+        JButton saveButton = new JButton("Save image");
+//        saveButton.addActionListener(new SaveActionListener);
+
+        // comboBox
+        JLabel label = new JLabel("Fractal");
+        fractalSelector = new JComboBox<>();
+        fractalSelector.addItem(new Mandelbrot());
+        fractalSelector.addItem(new Tricorn());
+        fractalSelector.addItem(new BurningShip());
+
+        // panels
+        JPanel selectPanel = new JPanel();
+        JPanel bottomPanel = new JPanel();
+        selectPanel.add(label,  BorderLayout.CENTER);
+        selectPanel.add(fractalSelector, BorderLayout.CENTER);
+        bottomPanel.add(resetButton, BorderLayout.CENTER);
+        bottomPanel.add(saveButton, BorderLayout.CENTER);
 
         JFrame frame = new JFrame("Fractal explorer");
         frame.setLayout(new BorderLayout());
         frame.add(displayImage, BorderLayout.CENTER);
-        frame.add(button, BorderLayout.SOUTH);
+        frame.add(resetButton, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -98,6 +118,13 @@ public class FractalExplorer {
             fractalGenerator = (FractalGenerator) fractalSelector.getSelectedItem();
             fractalGenerator.getInitialRange(complexAreaRange);
             drawFractal();
+        }
+    }
+
+    private class SaveActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 
