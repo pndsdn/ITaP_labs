@@ -137,7 +137,8 @@ public class FractalExplorer {
                 try {
                     ImageIO.write(displayImage.image, "png", fileChooser.getSelectedFile());
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    JOptionPane.showMessageDialog(displayImage, ex.getMessage(), "Error saving fractal",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
 
