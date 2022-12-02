@@ -42,4 +42,9 @@ public class Tricorn extends FractalGenerator {
             return iCount;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Tricorn";
+    }
 }
