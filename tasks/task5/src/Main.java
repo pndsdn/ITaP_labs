@@ -9,6 +9,11 @@ public class Main {
         System.out.println(canMove("Rook", "A8", "H8"));
         System.out.println(canMove("Bishop", "A7", "G1"));
         System.out.println(canMove("Queen", "C4", "D6"));
+        System.out.println("\n-----3-----");
+        System.out.println(canComplete("butl", "beautiful"));
+        System.out.println(canComplete("butlz", "beautiful"));
+        System.out.println(canComplete("tulb", "beautiful"));
+        System.out.println(canComplete("bbutl", "beautiful"));
     }
 
     // 5_1
@@ -68,6 +73,21 @@ public class Main {
 
         if (Math.abs((int) sX - (int) eX) == Math.abs(sY - eY)) {
             return ("Queen".equals(role) || "Bishop".equals(role));
+        }
+
+        return false;
+    }
+
+    // 5_3
+    public static boolean canComplete(String str1, String str2) {
+        int j = 0;
+        for (int i = 0; i < str2.length(); ++i) {
+            if (str1.charAt(j) == str2.charAt(i)) {
+                ++j;
+                if (j == str1.length()) {
+                    return true;
+                }
+            }
         }
 
         return false;
