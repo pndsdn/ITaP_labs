@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +21,10 @@ public class Main {
         System.out.println(sumDigProd(16, 28));
         System.out.println(sumDigProd(0));
         System.out.println(sumDigProd(1, 2, 3, 4, 5, 6));
+        System.out.println("\n-----4-----");
+        System.out.println(sameVowelGroup(new String[] {"toe", "ocelot", "maniac"}));
+        System.out.println(sameVowelGroup(new String[] {"many", "carriage", "emit", "apricot", "animal"}));
+        System.out.println(sameVowelGroup(new String[] {"hoops", "chuff", "bot", "bottom"}));
     }
 
     // 5_1
@@ -114,7 +121,36 @@ public class Main {
             numStr = String.valueOf(num);
             count = num;
         }
-        
+
         return count;
     }
+
+    // 5_5
+    public static ArrayList<String> sameVowelGroup(String[] words) {
+        ArrayList<String> res = new ArrayList<>();
+        Set<Character> set = new HashSet<>();
+        res.add(words[0]);
+
+        ArrayList<Character> vowels = new ArrayList<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'y'));
+        for (char i : words[0].toCharArray()) {
+            if (vowels.contains(i)) {
+                set.add(i);
+            }
+        }
+
+        for (int i = 1; i < words.length; ++i) {
+            Set<Character> vow = new HashSet<>();
+            for (char ch : words[i].toCharArray()) {
+                if (vowels.contains(ch)) {
+                    vow.add(ch);
+                }
+            }
+            if (vow.equals(set)) {
+                res.add(words[i]);
+            }
+        }
+
+        return res;
+    }
+
 }
