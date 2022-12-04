@@ -14,6 +14,10 @@ public class Main {
         System.out.println(canComplete("butlz", "beautiful"));
         System.out.println(canComplete("tulb", "beautiful"));
         System.out.println(canComplete("bbutl", "beautiful"));
+        System.out.println("\n-----4-----");
+        System.out.println(sumDigProd(16, 28));
+        System.out.println(sumDigProd(0));
+        System.out.println(sumDigProd(1, 2, 3, 4, 5, 6));
     }
 
     // 5_1
@@ -91,5 +95,26 @@ public class Main {
         }
 
         return false;
+    }
+
+    // 5_4
+    public static int sumDigProd(int... nums) {
+        int num = 0;
+        for (int n : nums) {
+            num += n;
+        }
+
+        String numStr = String.valueOf(num);
+        int count = 0;
+        while (num / 10 != 0) {
+            num = 1;
+            for (int i = 0; i < numStr.length(); ++i) {
+                num *= Integer.parseInt(String.valueOf(numStr.charAt(i)));
+            }
+            numStr = String.valueOf(num);
+            count = num;
+        }
+        
+        return count;
     }
 }
