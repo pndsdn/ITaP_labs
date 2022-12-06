@@ -25,11 +25,14 @@ public class Main {
         System.out.println(sameVowelGroup(new String[] {"toe", "ocelot", "maniac"}));
         System.out.println(sameVowelGroup(new String[] {"many", "carriage", "emit", "apricot", "animal"}));
         System.out.println(sameVowelGroup(new String[] {"hoops", "chuff", "bot", "bottom"}));
+        System.out.println("\n-----5-----");
+        System.out.println(validateCard(1234567890123456L));
+        System.out.println(validateCard(1234567890123452L));
     }
 
     // 5_1
     public static ArrayList<Integer> encrypt(String str) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
+        ArrayList<Integer> res = new ArrayList<>();
         res.add((int) str.charAt(0));
 
         for(int i = 1; i < str.length(); ++i) {
@@ -54,9 +57,9 @@ public class Main {
     //5_2
     public static boolean canMove(String role, String sPos, String ePos) {
         char sX = sPos.charAt(0);
-        int sY = (int) sPos.charAt(1);
+        int sY = sPos.charAt(1);
         char eX = ePos.charAt(0);
-        int eY = (int) ePos.charAt(1);
+        int eY = ePos.charAt(1);
 
         if ("Pawn".equals(role)) {
             if (sX == eX && eY - sY == 1) {
@@ -153,4 +156,35 @@ public class Main {
         return res;
     }
 
+    // 5_6
+    public static boolean validateCard(Long num) {
+        String strNum = num.toString();
+        if (strNum.length() < 14 || strNum.length() > 19){
+            return false;
+        }
+
+        Long controlNum = num % 10;
+        num /= 10;
+        strNum = num.toString();
+
+        String rStrNum = "";
+        for (int i = strNum.length()-1; i >= 0; --i) {
+            rStrNum += strNum.charAt(i);
+        }
+
+        int sum = 0;
+        for(int i = 0; i < rStrNum.length(); ++i) {
+            int iNum = rStrNum.charAt(i);
+            if (i % 2 == 0) {
+                iNum *= 2;
+
+                if (iNum / 10 != 0) {
+                    iNum = iNum / 10 + iNum % 10;
+                }
+            }
+            sum += iNum;
+        }
+
+        return (10 - sum % 10 == controlNum);
+    }
 }
