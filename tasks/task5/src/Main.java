@@ -21,13 +21,18 @@ public class Main {
         System.out.println(sumDigProd(16, 28));
         System.out.println(sumDigProd(0));
         System.out.println(sumDigProd(1, 2, 3, 4, 5, 6));
-        System.out.println("\n-----4-----");
+        System.out.println("\n-----5-----");
         System.out.println(sameVowelGroup(new String[] {"toe", "ocelot", "maniac"}));
         System.out.println(sameVowelGroup(new String[] {"many", "carriage", "emit", "apricot", "animal"}));
         System.out.println(sameVowelGroup(new String[] {"hoops", "chuff", "bot", "bottom"}));
-        System.out.println("\n-----5-----");
+        System.out.println("\n-----6-----");
         System.out.println(validateCard(1234567890123456L));
         System.out.println(validateCard(1234567890123452L));
+        System.out.println("\n-----7-----");
+        System.out.println(numToEng(0));
+        System.out.println(numToEng(18));
+        System.out.println(numToEng(126));
+        System.out.println(numToEng(909));
     }
 
     // 5_1
@@ -186,5 +191,93 @@ public class Main {
         }
 
         return (10 - sum % 10 == controlNum);
+    }
+
+    // 5_7
+    public static String numToEng(int num) {
+        class NumToStringConvertor {
+            private String unitsToString(int n) {
+                return switch (n) {
+                    case 1 -> "one";
+                    case 2 -> "two";
+                    case 3 -> "three";
+                    case 4 -> "four";
+                    case 5 -> "five";
+                    case 6 -> "six";
+                    case 7 -> "seven";
+                    case 8 -> "eight";
+                    case 9 -> "nine";
+                    default -> null;
+                };
+            }
+
+            private String tensToString(int n) {
+                return switch (n) {
+                    case 2 -> "twenty";
+                    case 3 -> "thirty";
+                    case 4 -> "forty";
+                    case 5 -> "fifty";
+                    case 6 -> "sixty";
+                    case 7 -> "seventy";
+                    case 8 -> "eighty";
+                    case 9 -> "ninety";
+                    default -> null;
+                };
+            }
+
+            private String firstTenToString(int n) {
+                return switch (n) {
+                    case 0 -> "ten";
+                    case 1 -> "eleven";
+                    case 2 -> "twelve";
+                    case 3 -> "thirteen";
+                    case 4 -> "fourteen";
+                    case 5 -> "fifteen";
+                    case 6 -> "sixteen";
+                    case 7 -> "seventeen";
+                    case 8 -> "eighteen";
+                    case 9 -> "nineteen";
+                    default -> null;
+                };
+            }
+        }
+
+        if (num == 0) {
+            return "zero";
+        }
+
+        final int hundreds = num / 100;
+        final int tens = (num / 10) % 10;
+        final int units = num % 10;
+
+        StringBuilder res = new StringBuilder();
+        NumToStringConvertor convertor = new NumToStringConvertor();
+
+        String sHundreds = convertor.unitsToString(hundreds);
+        String sTens;
+        String sUnits;
+        if (tens == 1) {
+            sTens = convertor.firstTenToString(units);
+            sUnits = null;
+        }
+        else {
+            sTens = convertor.tensToString(tens);
+            sUnits = convertor.unitsToString(units);
+        }
+
+        if (sHundreds != null) {
+            res.append(sHundreds);
+            res.append(" hundred");
+        }
+        if (sTens != null) {
+            if (sHundreds != null) res.append(" ");
+            res.append(sTens);
+        }
+        if (sUnits != null) {
+            if (sHundreds != null || sTens != null) res.append(" ");
+            res.append(sUnits);
+        }
+
+        return res.toString();
     }
 }
