@@ -40,6 +40,11 @@ public class Main {
         System.out.println(correctTitle("jOn SnoW, kINg IN thE noRth."));
         System.out.println(correctTitle("sansa stark, lady of winterfell."));
         System.out.println(correctTitle("TYRION LANNISTER, HAND OF THE QUEEN."));
+        System.out.println("\n-----10-----");
+        System.out.println(hexLatice(1));
+        System.out.println(hexLatice(7));
+        System.out.println(hexLatice(19));
+        System.out.println(hexLatice(21));
     }
 
     // 5_1
@@ -320,6 +325,39 @@ public class Main {
             joiner.add(w);
         }
 
+        return joiner.toString();
+    }
+
+    // 5_10
+    public static String hexLatice(int num) {
+        int ring = 1;
+        int currElem = 1;
+
+        while(currElem < num) {
+            currElem += 6*ring;
+            ++ring;
+        }
+        if (currElem != num) {
+            return "invalid";
+        }
+
+        final int hexSize = ring * 2 - 1;
+        final int hexSizeWithSpaces = hexSize * 2 - 1;
+
+        String[] hex = new String[hexSize];
+        for (int i = ring - 1; i >= 0; --i) {
+            int lenWithSpaces = (ring+i)*2 - 1;
+            int leftSpace = (hexSizeWithSpaces - lenWithSpaces)/2;
+            hex[i] = " ".repeat(leftSpace) + " o".repeat(ring + i) + " ".repeat(leftSpace);
+            if (i <= ring - 1) {
+                hex[hexSize - i - 1] = hex[i];
+            }
+        }
+
+        StringJoiner joiner = new StringJoiner("\n");
+        for(String h : hex) {
+            joiner.add(h);
+        }
         return joiner.toString();
     }
 }
