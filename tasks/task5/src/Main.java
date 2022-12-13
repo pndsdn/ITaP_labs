@@ -1,9 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,6 +32,14 @@ public class Main {
         System.out.println(numToEng(18));
         System.out.println(numToEng(126));
         System.out.println(numToEng(909));
+        System.out.println("\n-----8-----");
+        System.out.println(getSha256Hash("password123"));
+        System.out.println(getSha256Hash("Fluffy@home"));
+        System.out.println(getSha256Hash("Hey dude!"));
+        System.out.println("\n-----9-----");
+        System.out.println(correctTitle("jOn SnoW, kINg IN thE noRth."));
+        System.out.println(correctTitle("sansa stark, lady of winterfell."));
+        System.out.println(correctTitle("TYRION LANNISTER, HAND OF THE QUEEN."));
     }
 
     // 5_1
@@ -301,5 +306,20 @@ public class Main {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    // 5_9
+    public static String correctTitle(String str) {
+        String[] words = str.toLowerCase().split(" ");
+        StringJoiner joiner = new StringJoiner(" ");
+
+        for (String w : words) {
+            if (!(w.equals("and") || w.equals("the") || w.equals("of") || w.equals("in"))) {
+                w = w.substring(0, 1).toUpperCase() + w.substring(1);
+            }
+            joiner.add(w);
+        }
+
+        return joiner.toString();
     }
 }
