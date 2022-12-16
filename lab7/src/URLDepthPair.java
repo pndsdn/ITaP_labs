@@ -1,6 +1,6 @@
 public class URLDepthPair {
-    String url;
-    int depth;
+    private String url;
+    public int depth;
 
     URLDepthPair(String url, int depth) {
         this.url = url;
