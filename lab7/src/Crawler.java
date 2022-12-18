@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Crawler {
     private final LinkedList<URLDepthPair> linksToCheck = new LinkedList<>();
@@ -8,7 +9,7 @@ public class Crawler {
     public static void main(String[] args) {
 
         Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scanWebPage("https://slashdot.org/", 1));
+        System.out.println("found: " + crawler.scanWebPage("http://www.nytimes.com", 1));
     }
 
     private LinkedList<URLDepthPair> getSites() {
@@ -16,8 +17,9 @@ public class Crawler {
     }
 
     private LinkedList<URLDepthPair> scanWebPage(String startUrl, int maxDepth) {
+        linksToCheck.add(new URLDepthPair(startUrl, 0));
         try {
-            process(startUrl, maxDepth);
+            process(maxDepth);
         }
         catch (NumberFormatException | IOException e) {
             System.out.println("usage: java Crawler " + startUrl + " " + maxDepth + "\n exception: " + e);
@@ -25,8 +27,7 @@ public class Crawler {
         return getSites();
     }
 
-    private void process(String url, int maxDepth) throws IOException {
-        linksToCheck.add(new URLDepthPair(url, 0));
+    private void process(int maxDepth) throws IOException {
         while (!linksToCheck.isEmpty()) {
             URLDepthPair currentPair = linksToCheck.removeFirst();
             if (currentPair.depth < maxDepth) {
@@ -36,7 +37,7 @@ public class Crawler {
     }
 
     private void processPath(final URLDepthPair currentPair) throws IOException {
-        if (isKnown(currentPair)) {
+        if (checkedLinks.contains(currentPair)) {
             return;
         }
 
@@ -70,9 +71,5 @@ public class Crawler {
                 checkedLinks.add(currentPair);
             }
         });
-    }
-
-    private boolean isKnown(URLDepthPair pair) {
-            return linksToCheck.contains(pair) || checkedLinks.contains(pair);
     }
 }

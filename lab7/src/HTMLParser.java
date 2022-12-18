@@ -25,15 +25,14 @@ public class HTMLParser {
 
     public static List<String> scanHTTPLinks(BufferedReader in) throws IOException {
         String line;
-        line = in.readLine();
+        line = in.readLine(); // null
         System.out.println("HTMLParser::scanHTTPLinks() line before loop: " + line);
         LinkedList<String> foundLinks = new LinkedList<>();
         while (line != null) {
-            System.out.println("HTMLParser::scanHTTPLinks() line: " + line);
-            Pattern pattern = Pattern.compile("<a href=\"http://[^/]+/\">", Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("<a href=\"" + HTTP_PREFIX + "[^/]+/\">", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
-                int sIndex = matcher.group().indexOf("http://");
+                int sIndex = matcher.group().indexOf(HTTP_PREFIX);
                 int eIndex = matcher.group().indexOf(">") - 2;
                 foundLinks.add(matcher.group().substring(sIndex, eIndex));
             }

@@ -35,8 +35,22 @@ public class SocketClient {
         try {
             openSocket(host);
             if(client.isConnected()) {
+                System.out.println("SocketClient::request() hello there!");
+                client.setSoTimeout(100000);
+
+                /*
+                    There the BufferedReader is null. Idk why.
+                    I tried to find similar problems in the Internet, but without result
+                 */
                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                requestHTTP1_1(client.getOutputStream(), path, host);
+
+                PrintWriter pw = new PrintWriter(client.getOutputStream(), true);
+                pw.println("GET " + path + " HTTP/1.1");
+                pw.println("Host: " + host);
+                pw.println("Connection: close");
+                pw.println();
+                pw.flush();
+
                 callback.onSuccess(in);
             }
             else {
@@ -49,15 +63,6 @@ public class SocketClient {
         finally {
             closeSocket();
         }
-    }
-
-    private static void requestHTTP1_1(OutputStream outputStream, String path, String host) {
-        PrintWriter out = new PrintWriter(outputStream, true);
-        out.println("GET " + path+ " HTTP/1.1");
-        out.println("Host: " + host);
-        out.println("Connection: close");
-        out.println();
-        out.flush();
     }
 
     interface SocketCallback {

@@ -38,6 +38,9 @@ public class URLDepthPair {
 
     @Override
     public String toString() {
-        return url + " " + depth;
+        if (scanningException != null)
+            return "url='" + url + "' depth=" + depth + " exception='" + scanningException + "'";
+
+        return "url='" + url + "' depth=" + depth;
     }
 }
