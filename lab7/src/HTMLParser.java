@@ -25,8 +25,11 @@ public class HTMLParser {
 
     public static List<String> scanHTTPLinks(BufferedReader in) throws IOException {
         String line;
+        line = in.readLine();
+        System.out.println("HTMLParser::scanHTTPLinks() line before loop: " + line);
         LinkedList<String> foundLinks = new LinkedList<>();
-        while ((line = in.readLine()) != null) {
+        while (line != null) {
+            System.out.println("HTMLParser::scanHTTPLinks() line: " + line);
             Pattern pattern = Pattern.compile("<a href=\"http://[^/]+/\">", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
@@ -34,6 +37,7 @@ public class HTMLParser {
                 int eIndex = matcher.group().indexOf(">") - 2;
                 foundLinks.add(matcher.group().substring(sIndex, eIndex));
             }
+            line = in.readLine();
         }
         return foundLinks;
     }

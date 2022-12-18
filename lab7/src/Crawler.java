@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Crawler {
     private final LinkedList<URLDepthPair> linksToCheck = new LinkedList<>();
@@ -9,7 +8,7 @@ public class Crawler {
     public static void main(String[] args) {
 
         Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scanWebPage(args[0], Integer.parseInt(args[1])));
+        System.out.println("found: " + crawler.scanWebPage("https://slashdot.org/", 1));
     }
 
     private LinkedList<URLDepthPair> getSites() {
