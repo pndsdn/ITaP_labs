@@ -35,17 +35,8 @@ public class SocketClient {
         try {
             openSocket(host);
             if(client.isConnected()) {
-                System.out.println("SocketClient::request() hello there!");
-                client.setSoTimeout(100000);
-
-                /*
-                    There the BufferedReader is null. Idk why.
-                    I tried to find similar problems in the Internet, but without result
-                 */
+                client.setSoTimeout(10000);
                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
-
-//                BufferedReader in = new BufferedReader(new FileReader("/home/pndsdn/documents/site2.html"));
 
                 PrintWriter pw = new PrintWriter(client.getOutputStream(), true);
                 pw.println("GET " + path + " HTTP/1.1");

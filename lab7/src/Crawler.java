@@ -9,14 +9,14 @@ public class Crawler {
     public static void main(String[] args) {
 
         Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scanWebPage("http://info.cern.ch/", 1));
+        System.out.println("found: " + crawler.scanWebPage(args[0], Integer.parseInt(args[1])));
     }
 
-    private String getSites() {
-        return checkedLinks.toString();
+    private LinkedList<URLDepthPair> getSites() {
+        return checkedLinks;
     }
 
-    private String scanWebPage(String startUrl, int maxDepth) {
+    private LinkedList<URLDepthPair> scanWebPage(String startUrl, int maxDepth) {
         linksToCheck.add(new URLDepthPair(startUrl, 0));
         try {
             process(maxDepth);
