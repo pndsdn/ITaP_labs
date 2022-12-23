@@ -44,6 +44,9 @@ public class SocketClient {
                  */
                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
+
+//                BufferedReader in = new BufferedReader(new FileReader("/home/pndsdn/documents/site2.html"));
+
                 PrintWriter pw = new PrintWriter(client.getOutputStream(), true);
                 pw.println("GET " + path + " HTTP/1.1");
                 pw.println("Host: " + host);

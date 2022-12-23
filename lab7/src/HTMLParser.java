@@ -7,33 +7,18 @@ import java.util.regex.Pattern;
 
 public class HTMLParser {
     private static final String HTTP_PREFIX = "http://";
-
-    public static String scanForRedirect(String url, BufferedReader in) throws IOException {
-        String line = in.readLine();
-        if ("HTTP/1.1 301 Moved Permanently".equals(line)) {
-            while ((line = in.readLine()) != null) {
-                if (line.startsWith("Location:")) {
-                    String redirect = line.substring(10);
-                    if (!redirect.equals(url)) {
-                        return redirect;
-                    }
-                }
-            }
-        }
-        return null;
-    }
+    private static final String PATTERN = "[(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
     public static List<String> scanHTTPLinks(BufferedReader in) throws IOException {
         String line;
         line = in.readLine(); // null
-        System.out.println("HTMLParser::scanHTTPLinks() line before loop: " + line);
         LinkedList<String> foundLinks = new LinkedList<>();
         while (line != null) {
-            Pattern pattern = Pattern.compile("<a href=\"" + HTTP_PREFIX + "[^/]+/\">", Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("<a href=\"" + HTTP_PREFIX + PATTERN + "\"", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
                 int sIndex = matcher.group().indexOf(HTTP_PREFIX);
-                int eIndex = matcher.group().indexOf(">") - 2;
+                int eIndex = matcher.group().substring(sIndex).indexOf("\"") + sIndex;
                 foundLinks.add(matcher.group().substring(sIndex, eIndex));
             }
             line = in.readLine();

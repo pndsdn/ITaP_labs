@@ -9,14 +9,14 @@ public class Crawler {
     public static void main(String[] args) {
 
         Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scanWebPage("http://www.nytimes.com", 1));
+        System.out.println("found: " + crawler.scanWebPage("http://info.cern.ch/", 1));
     }
 
-    private LinkedList<URLDepthPair> getSites() {
-        return checkedLinks;
+    private String getSites() {
+        return checkedLinks.toString();
     }
 
-    private LinkedList<URLDepthPair> scanWebPage(String startUrl, int maxDepth) {
+    private String scanWebPage(String startUrl, int maxDepth) {
         linksToCheck.add(new URLDepthPair(startUrl, 0));
         try {
             process(maxDepth);
@@ -30,7 +30,7 @@ public class Crawler {
     private void process(int maxDepth) throws IOException {
         while (!linksToCheck.isEmpty()) {
             URLDepthPair currentPair = linksToCheck.removeFirst();
-            if (currentPair.depth < maxDepth) {
+            if (currentPair.depth <= maxDepth) {
                 processPath(currentPair);
             }
         }
@@ -46,15 +46,8 @@ public class Crawler {
             @Override
             public void onSuccess(BufferedReader in) {
                 try {
-                    String redirect = HTMLParser.scanForRedirect(currentPair.getUrl(), in);
-                    if (redirect != null) {
-                        currentPair.setUrl(redirect);
-                        linksToCheck.add(currentPair);
-                    }
-                    else {
-                        for (String url : HTMLParser.scanHTTPLinks(in)) {
-                            linksToCheck.add(new URLDepthPair(url, currentPair.depth + 1));
-                        }
+                    for (String url : HTMLParser.scanHTTPLinks(in)) {
+                        linksToCheck.add(new URLDepthPair(url, currentPair.depth + 1));
                     }
                 }
                 catch (IOException e) {
