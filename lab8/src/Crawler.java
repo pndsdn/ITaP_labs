@@ -1,68 +1,61 @@
 import java.io.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Crawler {
-    private final LinkedList<URLDepthPair> linksToCheck = new LinkedList<>();
-    private final LinkedList<URLDepthPair> checkedLinks = new LinkedList<>();
-
     public static void main(String[] args) {
+        final String url;
+        final int maxDepth;
+        final int threadsCount;
+        final int timeout;
 
-        Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scanWebPage(args[0], Integer.parseInt(args[1])));
-    }
-
-    private LinkedList<URLDepthPair> getSites() {
-        return checkedLinks;
-    }
-
-    private LinkedList<URLDepthPair> scanWebPage(String startUrl, int maxDepth) {
-        linksToCheck.add(new URLDepthPair(startUrl, 0));
         try {
-            process(maxDepth);
-        }
-        catch (NumberFormatException | IOException e) {
-            System.out.println("usage: java Crawler " + startUrl + " " + maxDepth + "\n exception: " + e);
-        }
-        return getSites();
-    }
-
-    private void process(int maxDepth) throws IOException {
-        while (!linksToCheck.isEmpty()) {
-            URLDepthPair currentPair = linksToCheck.removeFirst();
-            if (currentPair.depth <= maxDepth) {
-                processPath(currentPair);
+            url = args[0];
+            maxDepth = Integer.parseInt(args[1]);
+            threadsCount = Integer.parseInt(args[2]);
+            if (args.length == 4) {
+                timeout = Integer.parseInt(args[3]);
+            }
+            else {
+                timeout = 5000;
             }
         }
-    }
-
-    private void processPath(final URLDepthPair currentPair) throws IOException {
-        if (checkedLinks.contains(currentPair)) {
+        catch (Exception e) {
+            System.out.printf("Unexpected arguments. Expected '[string], [int], [int]', got %s", Arrays.toString(args));
+            System.out.println();
             return;
         }
 
-        SocketClient socketClient = new SocketClient();
-        socketClient.request(currentPair.getPath(), currentPair.getHost(), new SocketClient.SocketCallback() {
-            @Override
-            public void onSuccess(BufferedReader in) {
-                try {
-                    for (String url : HTMLParser.scanHTTPLinks(in)) {
-                        linksToCheck.add(new URLDepthPair(url, currentPair.depth + 1));
-                    }
-                }
-                catch (IOException e) {
-                    currentPair.setScanningException(e);
-                }
-                finally {
-                    checkedLinks.add(currentPair);
-                }
-            }
+        Crawler crawler = new Crawler();
+        System.out.println(crawler.scanWebPage(url, maxDepth, threadsCount, timeout));
+    }
 
-            @Override
-            public void onError(Exception e) {
-                currentPair.setScanningException(e);
-                checkedLinks.add(currentPair);
+    private List<URLDepthPair> scanWebPage(String url, int maxDepth, int threadsCount, int timeout) {
+        final URLPool urlPool = new URLPool(maxDepth, threadsCount);
+        ExecutorService crawlers = Executors.newFixedThreadPool(threadsCount);
+
+        final ArrayList<CrawlerTask> tasks = new ArrayList<>();
+        urlPool.addURLPairToCheck(new URLDepthPair(url, 0));
+
+        for (int i = 0; i < threadsCount; ++i) {
+            tasks.add(new CrawlerTask(urlPool, timeout));
+            crawlers.submit(tasks.get(tasks.size() - 1));
+        }
+
+        while (urlPool.isInProgress()) {
+            try {
+                Thread.sleep(500);
             }
-        });
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        crawlers.shutdownNow();
+        return urlPool.getSites();
     }
 }

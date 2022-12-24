@@ -10,7 +10,7 @@ public class CrawlerUnit {
         this.timeout = timeout;
     }
 
-    private void processPath(final URLDepthPair currentPair,
+    public void processPath(final URLDepthPair currentPair,
                              final LinkedList<URLDepthPair> linksToCheck,
                              final LinkedList<URLDepthPair> checkedLinks) throws MalformedURLException {
         SocketClient socketClient = new SocketClient();

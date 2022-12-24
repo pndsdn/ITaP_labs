@@ -59,6 +59,10 @@ public class URLPool {
         return linksToCheck.removeFirst();
     }
 
+    public boolean isInProgress() {
+        return waitingWorkersCount != threadsCount;
+    }
+
     public List<URLDepthPair> getSites() {
         return checkedLinks;
     }
