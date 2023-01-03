@@ -7,14 +7,16 @@ import java.util.regex.Pattern;
 
 public class HTMLParser {
     private static final String HTTP_PREFIX = "http://";
-    private static final String PATTERN = "[(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
+    private static final String PATTERN = "[(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}" +
+            "\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
     public static List<String> scanHTTPLinks(BufferedReader in) throws IOException {
         String line;
         line = in.readLine(); // null
         LinkedList<String> foundLinks = new LinkedList<>();
         while (line != null) {
-            Pattern pattern = Pattern.compile("<a href=\"" + HTTP_PREFIX + PATTERN + "\"", Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("<a href=\"" + HTTP_PREFIX +
+                    PATTERN + "\"", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
                 int sIndex = matcher.group().indexOf(HTTP_PREFIX);
